@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: php-app
+    working_dir: /var/www
+    volumes:
+      - ../:/var/www
+  nginx:
+    image: nginx:1.19-alpine
+    container_name: nginx-server
+    ports:
+      - "8888:80"
+    volumes:
+      - ../:/var/www
+      - ../logs:/var/log/nginx
+      - ./nginx:/etc/nginx/conf.d
+  db:
+    image: postgres:latest
+    container_name: postgres-db
+    volumes:
+      - ../storage/pgsql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
