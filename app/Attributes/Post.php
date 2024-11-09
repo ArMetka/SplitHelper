@@ -6,9 +6,10 @@ use App\Enums\HttpMethod;
 use Attribute;
 
 #[Attribute(Attribute::TARGET_METHOD | Attribute::IS_REPEATABLE)]
-abstract class Route
+class Post extends Route
 {
-    public function __construct(public string $path, public HttpMethod $method)
+    public function __construct(string $path)
     {
+        parent::__construct($path, HttpMethod::Post);
     }
 }

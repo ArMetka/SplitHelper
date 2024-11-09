@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
+/**
+ * @property array db
+ */
 class Config
 {
     protected array $config = [];

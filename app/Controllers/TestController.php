@@ -10,7 +10,7 @@ use App\View;
 
 class TestController
 {
-    #[Get('/test', HttpMethod::Get)]
+    #[Get('/test')]
     public function test(): View
     {
         return View::make('test');

@@ -11,6 +11,10 @@ class Router
 {
     private array $routes = [];
 
+    public function __construct(private Container $container)
+    {
+    }
+
     private function register(string $requestMethod, string $requestUri, array $action): void
     {
         $this->routes[$requestMethod][$requestUri] = $action;
@@ -44,14 +48,13 @@ class Router
                     $this->register($attribute->method->value, $attribute->path, [$controller, $method->getName()]);
                 }
             }
-
         }
     }
 
     public function resolve(string $requestUri, string $requestMethod): string
     {
         $route = explode('?', $requestUri)[0];
-        $action = $this->routes[strtolower($requestMethod)][$route];
+        $action = $this->routes[strtolower($requestMethod)][$route] ?? null;
 
         if (!$action) {
             throw new RouteNotFoundException();
@@ -62,7 +65,7 @@ class Router
         if (!class_exists($class)) {
             throw new RouteNotFoundException();
         }
-        $class = new $class();
+        $class = $this->container->get($class);
 
         if (!method_exists($class, $method)) {
             throw new RouteNotFoundException();
