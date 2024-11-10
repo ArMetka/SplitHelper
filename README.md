@@ -8,6 +8,11 @@
 
 ## Development
 
+```bash
+cd ./docker
+docker-compose up -d --build
+```
+
 ### Требуемый функционал
 
 #### Уровень сплитов
