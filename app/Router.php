@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Attributes\Access;
 use App\Attributes\Route;
+use App\Enums\HttpMethod;
 use App\Exceptions\RouteNotFoundException;
+use App\Middleware\AccessMiddleware;
 
 class Router
 {
@@ -15,19 +18,24 @@ class Router
     {
     }
 
-    private function register(string $requestMethod, string $requestUri, array $action): void
-    {
-        $this->routes[$requestMethod][$requestUri] = $action;
+    private function register(
+        HttpMethod $requestMethod,
+        string $requestUri,
+        array $action,
+        string $access = 'default'
+    ): void {
+        $action[] = $access;
+        $this->routes[$requestMethod->value][$requestUri] = $action;
     }
 
     public function get(string $requestUri, array $action): void
     {
-        $this->register('get', $requestUri, $action);
+        $this->register(HttpMethod::Get, $requestUri, $action);
     }
 
     public function post(string $requestUri, array $action): void
     {
-        $this->register('post', $requestUri, $action);
+        $this->register(HttpMethod::Post, $requestUri, $action);
     }
 
     public function routes(): array
@@ -41,14 +49,29 @@ class Router
             $class = new \ReflectionClass($controller);
 
             foreach ($class->getMethods() as $method) {
-                $attributes = $method->getAttributes(Route::class, \ReflectionAttribute::IS_INSTANCEOF);
+                $routeAttributes = $method->getAttributes(Route::class, \ReflectionAttribute::IS_INSTANCEOF);
+                $accessAttributes = $method->getAttributes(Access::class, \ReflectionAttribute::IS_INSTANCEOF);
 
-                foreach ($attributes as $attribute) {
-                    $attribute = $attribute->newInstance();
-                    $this->register($attribute->method->value, $attribute->path, [$controller, $method->getName()]);
+                if (!empty($accessAttributes)) {
+                    $access = (string)$accessAttributes[0]->newInstance();
+                } else {
+                    $access = 'default';
+                }
+
+                foreach ($routeAttributes as $routeAttribute) {
+                    $routeAttribute = $routeAttribute->newInstance();
+                    $this->register(
+                        $routeAttribute->method,
+                        $routeAttribute->path,
+                        [$controller, $method->getName()],
+                        $access
+                    );
                 }
             }
         }
+//        echo '<pre>';
+//        var_dump($this->routes);
+//        echo '</pre>';
     }
 
     public function resolve(string $requestUri, string $requestMethod): string
@@ -60,7 +83,7 @@ class Router
             throw new RouteNotFoundException();
         }
 
-        [$class, $method] = $action;
+        [$class, $method, $access] = $action;
 
         if (!class_exists($class)) {
             throw new RouteNotFoundException();
@@ -70,6 +93,8 @@ class Router
         if (!method_exists($class, $method)) {
             throw new RouteNotFoundException();
         }
+
+        $this->container->get(AccessMiddleware::class)->process($access);
 
         return (string)$class->$method();
     }

@@ -18,13 +18,13 @@ class User
         private \DateTime $updatedAt = new \DateTime()
     ) {
         if (empty($username) || (strlen($username) > 40)) {
-            throw new InvalidArgumentsException('Username is null or empty string or exceeds 40 symbols');
+            throw new InvalidArgumentsException('Username is an empty string or exceeds 40 symbols');
         }
         if (empty($password)) {
-            throw new InvalidArgumentsException('Password is null or empty string');
+            throw new InvalidArgumentsException('Password is an empty string');
         }
         if (isset($email) && (strlen($email) > 64)) {
-            throw new InvalidArgumentsException('Email string exceeds 64 symbols limit');
+            throw new InvalidArgumentsException('Email exceeds 64 symbols');
         }
     }
 

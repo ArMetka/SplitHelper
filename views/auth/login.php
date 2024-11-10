@@ -15,6 +15,15 @@
             <h1>Login</h1>
         </div>
 
+        <div class="errors">
+            <p>
+                <?php
+                    echo $_SESSION['errors']['login'] ?? '';
+                    unset($_SESSION['errors']['login']);
+                ?>
+            </p>
+        </div>
+
         <div class="form_user_pass">
             <p>Username</p>
             <input type="text" name="username" placeholder="Login" required>

@@ -82,3 +82,7 @@ button {
     border-radius: 15px;
     cursor: pointer;
 }
+
+.errors p {
+    color: rgb(222, 0, 0);
+}
