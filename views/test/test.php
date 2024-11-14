@@ -8,6 +8,7 @@
     <title>Test Page</title>
 </head>
 <body>
+<?php echo $this->getHeader($_SESSION['username'] ?? 'null', 'username') ?>
 <div class="container">
     <div class="header">
         <h1>Login</h1>

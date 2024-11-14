@@ -7,6 +7,7 @@ use App\App;
 require __DIR__ . '/../vendor/autoload.php';
 
 const VIEWS_PATH = __DIR__ . '/../views';
+const STORAGE_PATH = __DIR__ . '/../storage';
 
 session_start();
 

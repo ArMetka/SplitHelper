@@ -22,7 +22,7 @@ class UserService
     {
         $user = new User(
             null,
-            null,
+            $name,
             $name,
             $email,
             $password
@@ -62,13 +62,13 @@ class UserService
 
         if ($id) {
             $_SESSION['user'] = (int)$id;
-            $_SESSION['username'] = $user->getUsername();
+            $_SESSION['username'] = $user->getDisplayedName();
         }
     }
 
     public function loginUser(?string $username, ?string $password): void
     {
-        $query = 'SELECT id, password FROM users WHERE username = ?';
+        $query = 'SELECT id, password, displayed_name FROM users WHERE username = ?';
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(1, $username);
         $stmt->execute();
@@ -83,6 +83,31 @@ class UserService
         }
 
         $_SESSION['user'] = (int)$user['id'];
-        $_SESSION['username'] = $username;
+        $_SESSION['username'] = $user['displayed_name'];
+    }
+
+    public function findById(int $id): User
+    {
+        return new User(null, null, 'test1', null, 'test2');
+    }
+
+    public function updateDisplayedName(int $id, string $displayed_name): void
+    {
+        if (empty($displayed_name)) {
+            throw new InvalidArgumentsException('Display name is an empty string');
+        }
+
+        if (strlen($displayed_name) > 40) {
+            throw new InvalidArgumentsException('Display name exceeds 40 symbols');
+        }
+
+        $query = 'UPDATE users SET displayed_name = ? WHERE id = ?';
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(1, $displayed_name);
+        $stmt->bindValue(2, $id);
+        $stmt->execute();
+
+        $_SESSION['username'] = $displayed_name;
     }
 }

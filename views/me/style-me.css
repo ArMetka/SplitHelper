@@ -66,10 +66,49 @@ h1, h2, h3, h4, h5, h6 {
     gap: 30px;
 }
 
-.gifka {
-    width: 100%;
-    min-height: 100%;
-    margin-top: 100px;
+.body {
+    max-width: 540px;
+    background-color: rgb(98, 98, 98);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 80px auto;
+    padding: 15px 0;
+    border-radius: 30px;
+}
+
+.body div {
+    width: 70%;
+    margin: auto;
+    padding: 5px 20px;
+    text-align: center;
+}
+
+.body .form_user_pass p {
+    text-align: start;
+    margin-bottom: 3px;
+    font-size: 14px;
+}
+
+.form_user_pass input {
+    height: 50px;
+    width: 100%;
+    opacity: 0.9;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    text-indent: 15px;
+}
+
+button {
+    height: 50px;
+    width: 220px;
+    font-size: 24px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.errors p {
+    color: rgb(222, 0, 0);
 }

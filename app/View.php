@@ -34,6 +34,40 @@ class View
         return (string)ob_get_clean();
     }
 
+    public function getHeader(string $name = 'null', string $active = ''): string
+    {
+        $home = $splits = $github = $test = $username = '';
+        if (!empty($active)) {
+            $$active = 'class="active"';
+        }
+        return <<<TEXT
+<header class="header">
+    <div class="container">
+        <div class="user-name">
+            <a {$username} href="/me">
+                $name
+            </a>
+        </div>
+
+        <div class="nav">
+            <nav class="header-nav">
+                <ul class="header-nav-list">
+                    <li><a {$home} href="/home">home</a></li>
+                    <li><a {$splits} href="/splits">splits</a></li>
+                    <li><a {$github} href="https://github.com/ArMetka/SplitHelper" target="_blank">github</a></li>
+                    <li><a {$test} href="/test">test</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="logout">
+            <a href="/auth/logout" class="btn-exit">Log out</a>
+        </div>
+    </div>
+</header>
+TEXT;
+    }
+
     public function __toString(): string
     {
         return $this->render();

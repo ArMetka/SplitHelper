@@ -16,6 +16,13 @@ class TestController
         return View::make('test/test');
     }
 
+    #[Get('/testimg')]
+    public function testimg(): View
+    {
+        var_dump($_GET);
+        exit;
+    }
+
     #[Post('/test')]
     public function fetchTest(): never
     {

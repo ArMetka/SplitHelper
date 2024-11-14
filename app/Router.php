@@ -69,9 +69,6 @@ class Router
                 }
             }
         }
-//        echo '<pre>';
-//        var_dump($this->routes);
-//        echo '</pre>';
     }
 
     public function resolve(string $requestUri, string $requestMethod): string
@@ -80,7 +77,7 @@ class Router
         $action = $this->routes[strtolower($requestMethod)][$route] ?? null;
 
         if (!$action) {
-            throw new RouteNotFoundException();
+            throw new RouteNotFoundException('Requested route "' . $route . '" not found!');
         }
 
         [$class, $method, $access] = $action;

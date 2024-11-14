@@ -6,6 +6,8 @@ namespace App;
 
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
+use App\Controllers\ImgController;
+use App\Controllers\MeController;
 use App\Controllers\RedirectController;
 use App\Controllers\TestController;
 use App\Exceptions\RouteNotFoundException;
@@ -28,6 +30,8 @@ class App
                 TestController::class,
                 AuthController::class,
                 RedirectController::class,
+                MeController::class,
+                ImgController::class,
             ]
         );
     }
@@ -47,13 +51,9 @@ class App
         try {
             echo $this->router->resolve($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
         } catch (RouteNotFoundException|ViewNotFoundException $e) {
-            echo View::make('errors/404');
-            echo 'Exception occurred on line ' . $e->getLine() . ' in file "' . $e->getFile() . '"<br>';
-            echo 'Message: ' . $e->getMessage();
+            echo View::make('errors/404', ['exception' => $e]);
         } catch (\Throwable $e) {
-            echo View::make('errors/503');
-            echo 'Exception occurred on line ' . $e->getLine() . ' in file "' . $e->getFile() . '"<br>';
-            echo 'Message: ' . $e->getMessage();
+            echo View::make('errors/503', ['exception' => $e]);
         }
     }
 }

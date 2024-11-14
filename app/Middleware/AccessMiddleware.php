@@ -18,6 +18,7 @@ class AccessMiddleware
             } else {
                 http_response_code(401);
                 header('Location: /auth/login');
+                exit;
             }
         }
 
@@ -27,6 +28,7 @@ class AccessMiddleware
             } else {
                 http_response_code(302);
                 header('Location: /home');
+                exit;
             }
         }
     }

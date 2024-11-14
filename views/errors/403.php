@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php
     $e = $this->params['exception'] ?? null ?>
-    <title>404 Not Found</title>
+    <title>403 Forbidden</title>
 </head>
 <body>
-<h1>404 Not Found</h1>
-<p>Requested page not found on this server! <a href="/home">Go home</a></p>
+<h1>403 Forbidden</h1>
+<p>You have no permission to visit this page <a href="/home">Go home</a></p>
 <p><?php
     if (isset($e)) {
         echo 'Exception occurred on line ' . $e->getLine() . ' in file "' . $e->getFile() . '"<br>';
