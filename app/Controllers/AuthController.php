@@ -55,7 +55,7 @@ class AuthController
     public function registerUser(): never
     {
         try {
-            $this->userService->registerUser($_POST['username'], $_POST['password']);
+            $this->userService->registerUser($_POST['username'], $_POST['password'], $_POST['repeat_password']);
         } catch (InvalidArgumentsException $e) {
             http_response_code(401);
             header('Location: /auth/register');

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Attributes\Controller;
 use App\Attributes\Get;
 use App\Attributes\Post;
 use App\Attributes\Secure;
@@ -11,6 +12,7 @@ use App\Exceptions\InvalidArgumentsException;
 use App\Services\UserService;
 use App\View;
 
+#[Controller]
 class MeController
 {
     public function __construct(private UserService $userService)

@@ -8,6 +8,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 const VIEWS_PATH = __DIR__ . '/../views';
 const STORAGE_PATH = __DIR__ . '/../storage';
+const CONTROLLERS_PATH = __DIR__ . '/../app/Controllers';
 
 session_start();
 

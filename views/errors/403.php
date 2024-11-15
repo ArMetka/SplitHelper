@@ -7,15 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php
     $e = $this->params['exception'] ?? null ?>
+    <style>
+        <?php include __DIR__ . '/style-error.css'?>
+    </style>
     <title>403 Forbidden</title>
 </head>
 <body>
-<h1>403 Forbidden</h1>
-<p>You have no permission to visit this page <a href="/home">Go home</a></p>
-<p><?php
-    if (isset($e)) {
-        echo 'Exception occurred on line ' . $e->getLine() . ' in file "' . $e->getFile() . '"<br>';
-        echo 'Message: ' . $e->getMessage();
-    } ?></p>
+<div class="container">
+    <h1>403 Forbidden</h1>
+    <p class="payload">You have no permission to visit this page <a href="/home">Go home</a></p>
+    <p class="debug"><?php
+        if (isset($e)) {
+            echo 'Exception occurred on line ' . $e->getLine() . ' in file "' . $e->getFile() . '"<br>';
+            echo 'Message: ' . $e->getMessage();
+        } ?></p>
+    <a href="/home">
+        <button>Go Home</button>
+    </a>
+</div>
 </body>
 </html>

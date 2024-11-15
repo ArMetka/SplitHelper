@@ -22,7 +22,7 @@ h1 {
 }
 
 a {
-    color: rgb(56, 56, 255);
+    color: #00ddfa;
     transition: opacity 0.1s;
     cursor: pointer;
 }
@@ -42,7 +42,7 @@ body {
 .container {
     min-height: 400px;
     min-width: 540px;
-    background-color: rgb(98, 98, 98);
+    background-color: #626262;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,7 +80,13 @@ button {
     width: 220px;
     font-size: 24px;
     border-radius: 15px;
+    background-color: antiquewhite;
     cursor: pointer;
+    transition: all .3s;
+}
+
+button:hover {
+    background-color: burlywood;
 }
 
 .errors p {

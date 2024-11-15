@@ -18,8 +18,12 @@ class UserService
         $this->db = App::db();
     }
 
-    public function registerUser(?string $name, ?string $password, $email = null): void
+    public function registerUser(?string $name, ?string $password, ?string $repeatPassword, ?string $email = null): void
     {
+        if ($password !== $repeatPassword) {
+            throw new InvalidArgumentsException('Passwords does not match!');
+        }
+
         $user = new User(
             null,
             $name,

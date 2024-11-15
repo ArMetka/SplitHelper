@@ -7,15 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php
     $e = $this->params['exception'] ?? null ?>
+    <style>
+        <?php include __DIR__ . '/style-error.css'?>
+    </style>
     <title>404 Not Found</title>
 </head>
 <body>
-<h1>404 Not Found</h1>
-<p>Requested page not found on this server! <a href="/home">Go home</a></p>
-<p><?php
-    if (isset($e)) {
-        echo 'Exception occurred on line ' . $e->getLine() . ' in file "' . $e->getFile() . '"<br>';
-        echo 'Message: ' . $e->getMessage();
-    } ?></p>
+<div class="container">
+    <h1>404 Not Found</h1>
+    <p class="payload">Requested page not found on this server!</p>
+    <p class="debug"><?php
+        if (isset($e)) {
+            echo 'Exception occurred on line ' . $e->getLine() . ' in file "' . $e->getFile() . '"<br>';
+            echo 'Message: ' . $e->getMessage();
+        } ?></p>
+    <a href="/home">
+        <button>Go Home</button>
+    </a>
+</div>
 </body>
 </html>

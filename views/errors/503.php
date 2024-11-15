@@ -7,15 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php
     $e = $this->params['exception'] ?? null ?>
+    <style>
+        <?php include __DIR__ . '/style-error.css'?>
+    </style>
     <title>503 Service Unavailable</title>
 </head>
 <body>
-<h1>503 Service Unavailable</h1>
-<p>Internal server error!</p>
-<p><?php
-    if (isset($e)) {
-        echo 'Exception occurred on line ' . $e->getLine() . ' in file "' . $e->getFile() . '"<br>';
-        echo 'Message: ' . $e->getMessage();
-    } ?></p>
+<div class="container">
+    <h1>503 Service Unavailable</h1>
+    <p class="payload">Internal server error!</p>
+    <p class="debug"><?php
+        if (isset($e)) {
+            echo 'Exception occurred on line ' . $e->getLine() . ' in file "' . $e->getFile() . '"<br>';
+            echo 'Message: ' . $e->getMessage();
+        } ?></p>
+    <a href="/home">
+        <button>Go Home</button>
+    </a>
+</div>
 </body>
 </html>
