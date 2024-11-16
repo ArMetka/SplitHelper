@@ -9,9 +9,28 @@
     <title>Home</title>
 </head>
 <body>
-    <?php echo $this->getHeader($_SESSION['username'] ?? 'null', 'home') ?>
-    <div class="gifka">
-        <img src="/img?i=botani.gif" alt="botani">
-    </div>
+<?php
+echo $this->getHeader($_SESSION['username'] ?? 'null', 'home') ?>
+
+<div class="useless_button">
+    <button id="useless_btn" class="glow-on-hover" type="button">Useless Button</button>
+</div>
+
+<div class="gifka">
+    <img src="/img?i=botani.gif" alt="botani">
+</div>
+
+<script>
+    document.getElementById('useless_btn').addEventListener('click', gamble);
+
+    function gamble() {
+        const num = Math.round(Math.random() * 100);
+        console.log(num);
+        if (num === 69) {
+            alert('V EBAL0 SEBE P0Tb1KAY D0LB4Y0B');
+            window.location.href = "https://www.youtube.com/watch?v=hr7GyFM7pX4";
+        }
+    }
+</script>
 </body>
 </html>

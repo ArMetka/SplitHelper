@@ -13,13 +13,47 @@ class TestController
     #[Get('/test')]
     public function test(): View
     {
+        $data = [
+            'HOME',
+            'PHP_VERSION',
+            'PHP_URL',
+            'PWD',
+            'HTTP_COOKIE',
+            'HTTP_ACCEPT_LANGUAGE',
+            'HTTP_REFERER',
+            'HTTP_ACCEPT',
+            'HTTP_USER_AGENT',
+            'HTTP_SEC_CH_UA_PLATFORM',
+            'HTTP_SEC_CH_UA',
+            'HTTP_HOST',
+            'SCRIPT_FILENAME',
+            'SERVER_NAME',
+            'SERVER_PORT',
+            'SERVER_ADDR',
+            'REMOTE_PORT',
+            'REMOTE_ADDR',
+            'SERVER_PROTOCOL',
+            'REQUEST_METHOD',
+            'REQUEST_TIME_FLOAT',
+            'REQUEST_TIME',
+        ];
+        ob_start();
+        echo '<pre>';
+        foreach ($data as $datum) {
+            echo $datum . ' => ' . $_SERVER[$datum] . '<br>';
+        }
+        echo '</pre>';
+        session_regenerate_id();
+        ob_flush();
         return View::make('test/test');
     }
 
-    #[Get('/testimg')]
+    #[Get('/test1')]
     public function testimg(): View
     {
-        var_dump($_GET);
+        echo '<pre>';
+        var_dump($_SERVER);
+        echo '</pre>';
         exit;
     }
 

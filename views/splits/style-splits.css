@@ -44,7 +44,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
 }
 
-.container a {
+.header a {
     font-size: 16px;
     opacity: 0.7;
     text-transform: uppercase;
@@ -56,11 +56,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 18px;
 }
 
-.container a:hover {
+.header a:hover {
     opacity: 0.9;
 }
 
-.container a.active{
+.header a.active{
     opacity: 1;
 }
 
@@ -69,34 +69,66 @@ h1, h2, h3, h4, h5, h6 {
     gap: 30px;
 }
 
-.body {
-    max-width: 540px;
-    background-color: rgb(98, 98, 98);
+/* splits list */
+
+.container h1 {
+    margin: 50px 50px 25px 50px;
+    font-size: 36px;
+}
+
+.container .split_add {
+    margin-left: 65px;
+    width: 180px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: lightgrey;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.container .split_add:hover {
+    background-color: #aaaaaa;
+}
+
+.split_list {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: space-between;
-    margin: 80px auto;
-    padding: 15px 0;
-    border-radius: 30px;
+    align-items: center;
+    margin: 0 50px;
 }
 
-.body div {
-    width: 70%;
-    margin: auto;
-    padding: 5px 20px;
-    text-align: center;
+.split_list .split_name {
+    font-size: 22px;
+    text-indent: 15px;
+    opacity: .9;
+    transition: all .2s;
 }
 
-.body .form_user_pass p {
+.split_list .split_name:hover {
+    opacity: 1;
+}
+
+.split_list .split_date, .split_list .split_owner {
+    font-size: 18px;
+    opacity: .6;
+}
+
+/* split create */
+
+.form-text, .form-checkbox {
+    margin: 25px 0 25px 65px;
+}
+
+.form-text p, .form-checkbox p {
     text-align: start;
-    margin-bottom: 3px;
-    font-size: 14px;
+    margin-bottom: 5px;
+    font-size: 16px;
 }
 
-.form_user_pass input {
+.form-text input {
     height: 50px;
-    width: 100%;
+    width: 80%;
     opacity: 0.9;
     border: none;
     border-radius: 50px;
@@ -104,20 +136,7 @@ h1, h2, h3, h4, h5, h6 {
     text-indent: 15px;
 }
 
-button {
-    height: 50px;
-    width: 220px;
-    font-size: 24px;
-    border-radius: 15px;
-    background-color: lightgrey;
-    cursor: pointer;
-    transition: all .3s;
-}
-
-button:hover {
-    background-color: #aaaaaa;
-}
-
-.errors p {
-    color: #FF3814;
+.form-checkbox input {
+    width: 30px;
+    height: 30px;
 }

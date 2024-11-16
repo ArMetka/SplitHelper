@@ -20,6 +20,10 @@ class UserService
 
     public function registerUser(?string $name, ?string $password, ?string $repeatPassword, ?string $email = null): void
     {
+        if (!isset($_ENV['ENABLE_REGISTRATION']) || $_ENV['ENABLE_REGISTRATION'] !== 'true') {
+            throw new InvalidArgumentsException('Registration is currently disabled!');
+        }
+
         if ($password !== $repeatPassword) {
             throw new InvalidArgumentsException('Passwords does not match!');
         }

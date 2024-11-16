@@ -80,15 +80,15 @@ button {
     width: 220px;
     font-size: 24px;
     border-radius: 15px;
-    background-color: antiquewhite;
+    background-color: lightgrey;
     cursor: pointer;
     transition: all .3s;
 }
 
 button:hover {
-    background-color: burlywood;
+    background-color: #aaaaaa;
 }
 
 .errors p {
-    color: rgb(222, 0, 0);
+    color: #FF3814;
 }

@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-body {
-    min-height: 70vh;
-    background-color: #1f1f1f;
+* {
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-optical-sizing: auto;
     font-style: normal;
+}
+
+body {
+    min-height: 70vh;
+    background-color: #1f1f1f;
 }
 
 .container {
@@ -44,10 +47,10 @@ button {
     border-radius: 20px;
     font-size: 26px;
     cursor: pointer;
-    background-color: antiquewhite;
+    background-color: lightgrey;
     transition: all .3s;
 }
 
 button:hover {
-    background-color: burlywood;
+    background-color: #aaaaaa;
 }
