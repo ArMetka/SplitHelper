@@ -25,7 +25,6 @@ class Split
         if (strlen($title) < 3) {
             throw new InvalidArgumentsException('Split\'s title is less than 3 symbols');
         }
-
     }
 
     public function getUpdatedAt(): \DateTime

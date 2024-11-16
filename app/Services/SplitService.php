@@ -7,6 +7,7 @@ namespace App\Services;
 use App\App;
 use App\DB;
 use App\Entity\Split;
+use App\Enums\SplitAccessLevel;
 
 class SplitService
 {
@@ -53,6 +54,36 @@ class SplitService
         }
 
         return $uniqueStr;
+    }
+
+    public function fetchAllById(string $id): array
+    {
+        $query = <<<TEXT
+SELECT splits.id, title, is_public, users.displayed_name, splits.created_at, splits.updated_at FROM splits
+INNER JOIN users on users.id = splits.owner_id
+WHERE splits.id = '{$id}'
+TEXT;
+        $stmt = $this->db->query($query);
+        $splitData = $stmt->fetch();
+
+        $query = <<<TEXT
+SELECT * FROM generated_tables.items_{$id}
+TEXT;
+        $stmt = $this->db->query($query);
+        $itemsData = $stmt->fetchAll();
+
+        $query = <<<TEXT
+SELECT users.displayed_name, item_ids FROM generated_tables.clients_{$id}
+INNER JOIN users ON users.id = generated_tables.clients_{$id}.user_id
+TEXT;
+        $stmt = $this->db->query($query);
+        $clientsData = $stmt->fetchAll();
+
+        return [
+            'split' => $splitData,
+            'items' => $itemsData,
+            'clients' => $clientsData
+        ];
     }
 
     public function findByOwnerId(int $ownerId): array
@@ -141,7 +172,7 @@ TEXT;
 
         $stmt->bindValue(1, $split->getId());
         $stmt->bindValue(2, $split->getTitle());
-        $stmt->bindValue(3, $split->isPublic());
+        $stmt->bindValue(3, $split->isPublic() ? 'true' : 'false');
         $stmt->bindValue(4, $split->getOwnerId());
         $stmt->bindValue(5, '{' . implode(",", $split->getViewerIds()) . '}');
         $stmt->bindValue(6, '{' . implode(",", $split->getEditorIds()) . '}');
@@ -150,5 +181,47 @@ TEXT;
         $stmt->bindValue(9, $split->getUpdatedAt()->format('Y-m-d H:i:s'));
 
         $stmt->execute();
+    }
+
+    public function checkSplitAccess(string $splitId, int $userId, SplitAccessLevel $requestedAccess): bool
+    {
+        if ($requestedAccess === SplitAccessLevel::Owner) {
+            $query = 'SELECT owner_id FROM splits WHERE id = ?';
+            $stmt = $this->db->prepare($query);
+
+            $stmt->bindValue(1, $splitId);
+            $stmt->execute();
+
+            $ownerId = $stmt->fetch()['owner_id'] ?? null;
+
+            return ((isset($ownerId)) && ($ownerId === $userId));
+        } else {
+            if ($requestedAccess === SplitAccessLevel::Editor) {
+                $query = 'SELECT owner_id FROM splits WHERE (id = ?) AND ((? = ANY(editor_ids)) OR (? = owner_id))';
+                $stmt = $this->db->prepare($query);
+
+                $stmt->bindValue(1, $splitId);
+                $stmt->bindValue(2, $userId);
+                $stmt->bindValue(3, $userId);
+                $stmt->execute();
+
+                return ($stmt->rowCount() !== 0);
+            } else {
+                if ($requestedAccess === SplitAccessLevel::Viewer) {
+                    $query = 'SELECT owner_id FROM splits WHERE (id = ?) AND ((? = ANY(editor_ids)) OR (? = ANY(viewer_ids)) OR (? = owner_id) OR (is_public = true))';
+                    $stmt = $this->db->prepare($query);
+
+                    $stmt->bindValue(1, $splitId);
+                    $stmt->bindValue(2, $userId);
+                    $stmt->bindValue(3, $userId);
+                    $stmt->bindValue(4, $userId);
+                    $stmt->execute();
+
+                    return ($stmt->rowCount() !== 0);
+                } else {
+                    return false;
+                }
+            }
+        }
     }
 }

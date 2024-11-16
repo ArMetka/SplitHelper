@@ -83,6 +83,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
     background-color: lightgrey;
     font-size: 16px;
+    text-indent: -5px;
     cursor: pointer;
     transition: all .3s;
 }
@@ -90,6 +91,8 @@ h1, h2, h3, h4, h5, h6 {
 .container .split_add:hover {
     background-color: #aaaaaa;
 }
+
+/* list */
 
 .split_list {
     display: flex;
@@ -110,6 +113,47 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .split_list .split_date, .split_list .split_owner {
+    font-size: 18px;
+    opacity: .6;
+}
+
+/* table */
+
+.split_table {
+    margin: 0 50px;
+    width: 95%;
+    border: none;
+}
+
+.split_table td {
+    padding: 0 15px;
+}
+
+.split_table .td1 {
+    width: 50%;
+}
+
+.split_table .td2 {
+    width: 30%;
+}
+
+.split_table .td3 {
+    width: 20%;
+}
+
+.split_table .split_name {
+    font-size: 22px;
+    opacity: .9;
+    transition: all .2s;
+}
+
+.split_table .split_name:hover {
+    opacity: 1;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+.split_table .split_date, .split_table .split_owner {
     font-size: 18px;
     opacity: .6;
 }

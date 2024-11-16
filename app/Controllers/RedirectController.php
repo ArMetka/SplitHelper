@@ -35,4 +35,13 @@ class RedirectController
         header('Location: /home');
         exit;
     }
+
+    #[Get('/splits/list')]
+    #[Secure]
+    public function splitsAliases(): never
+    {
+        http_response_code(302);
+        header('Location: /splits');
+        exit;
+    }
 }

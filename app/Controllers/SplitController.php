@@ -7,6 +7,7 @@ namespace App\Controllers;
 use App\Attributes\Get;
 use App\Attributes\Post;
 use App\Attributes\Secure;
+use App\Enums\SplitAccessLevel;
 use App\Exceptions\InvalidArgumentsException;
 use App\Services\SplitService;
 use App\View;
@@ -54,5 +55,29 @@ class SplitController
         http_response_code(302);
         header('Location: /splits/edit?s=' . $splitId);
         exit;
+    }
+
+    #[Secure]
+    #[Get('/splits/view')]
+    public function viewSplit(): View
+    {
+        if (!isset($_GET['s']) || !$this->splitService->checkSplitAccess(
+                $_GET['s'],
+                $_SESSION['user'],
+                SplitAccessLevel::Viewer
+            )) {
+            http_response_code(403);
+            View::make('errors/403');
+            exit;
+        }
+
+        $params = $this->splitService->fetchAllById($_GET['s']);
+
+        echo '<pre>';
+        var_dump($params);
+        echo '</pre>';
+        exit;
+
+        return View::make('splits/view', $params);
     }
 }
