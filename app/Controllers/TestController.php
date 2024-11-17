@@ -23,8 +23,6 @@ class TestController
             'HTTP_REFERER',
             'HTTP_ACCEPT',
             'HTTP_USER_AGENT',
-            'HTTP_SEC_CH_UA_PLATFORM',
-            'HTTP_SEC_CH_UA',
             'HTTP_HOST',
             'SCRIPT_FILENAME',
             'SERVER_NAME',

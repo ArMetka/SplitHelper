@@ -73,11 +73,20 @@ class SplitController
 
         $params = $this->splitService->fetchAllById($_GET['s']);
 
-        echo '<pre>';
-        var_dump($params);
-        echo '</pre>';
-        exit;
+//        echo '<pre>';
+//        var_dump($params);
+//        echo '</pre>';
+//        exit;
 
         return View::make('splits/view', $params);
+    }
+
+    #[Secure]
+    #[Get('/splits/edit')]
+    public function editSplit(): View
+    {
+        http_response_code(302);
+        header('Location: /splits');
+        exit;
     }
 }

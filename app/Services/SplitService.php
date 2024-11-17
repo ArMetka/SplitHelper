@@ -68,16 +68,21 @@ TEXT;
 
         $query = <<<TEXT
 SELECT * FROM generated_tables.items_{$id}
+ORDER BY id
 TEXT;
         $stmt = $this->db->query($query);
         $itemsData = $stmt->fetchAll();
 
         $query = <<<TEXT
-SELECT users.displayed_name, item_ids FROM generated_tables.clients_{$id}
+SELECT user_id, users.displayed_name, array_to_json(item_ids) AS item_ids FROM generated_tables.clients_{$id}
 INNER JOIN users ON users.id = generated_tables.clients_{$id}.user_id
+ORDER BY user_id
 TEXT;
         $stmt = $this->db->query($query);
         $clientsData = $stmt->fetchAll();
+        foreach ($clientsData as &$clientsDatum) {
+            $clientsDatum['item_ids'] = json_decode($clientsDatum['item_ids']);
+        }
 
         return [
             'split' => $splitData,

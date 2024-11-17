@@ -18,8 +18,8 @@
         <div class="errors">
             <p>
                 <?php
-                    echo $_SESSION['errors']['login'] ?? '';
-                    unset($_SESSION['errors']['login']);
+                echo $_SESSION['errors']['login'] ?? '';
+                unset($_SESSION['errors']['login']);
                 ?>
             </p>
         </div>
@@ -31,7 +31,7 @@
 
         <div class="form_user_pass">
             <p>Password</p>
-            <input type="password" name="password"  placeholder="Password" required>
+            <input type="password" name="password" placeholder="Password" required>
         </div>
 
         <div class="button_login">

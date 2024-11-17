@@ -10,7 +10,8 @@
 </head>
 <body>
 
-<?php echo $this->getHeader($_SESSION['username'] ?? 'null', 'splits') ?>
+<?php
+echo $this->getHeader($_SESSION['username'] ?? 'null', 'splits') ?>
 
 <form action="/splits/create" method="post" class="split_create_form">
     <div class="container">

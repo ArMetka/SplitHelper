@@ -8,11 +8,13 @@
     <style>
         <?php include __DIR__ . '/style-me.css'?>
     </style>
-    <title><?php echo $_SESSION['username'] ?? 'My profile' ?></title>
+    <title><?php
+        echo $_SESSION['username'] ?? 'My profile' ?></title>
 </head>
 <body>
 
-<?php echo $this->getHeader($_SESSION['username'] ?? 'null', 'username') ?>
+<?php
+echo $this->getHeader($_SESSION['username'] ?? 'null', 'username') ?>
 
 <form action="/me/update" method="post">
     <div class="body">
@@ -31,7 +33,8 @@
 
         <div class="form_user_pass">
             <p>Display name</p>
-            <input type="text" name="displayed_name" placeholder="<?php echo $_SESSION['username'] ?? 'null' ?>" required>
+            <input type="text" name="displayed_name" placeholder="<?php
+            echo $_SESSION['username'] ?? 'null' ?>" required>
         </div>
 
         <div class="button_login">

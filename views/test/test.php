@@ -12,6 +12,8 @@
     <title>Test Page</title>
 </head>
 <body>
-<a href="/home"><button style="width: 400px; height: 200px; font-size: 48px">Go Home</button></a>
+<a href="/home">
+    <button style="width: 400px; height: 200px; font-size: 48px">Go Home</button>
+</a>
 </body>
 </html>

@@ -28,7 +28,7 @@ echo $this->getHeader($_SESSION['username'] ?? 'null', 'splits') ?>
             echo <<<HTML
 <tr class="split_table_row">
     <td class="td1"><a href="/splits/view?s={$ownedSplit['id']}"><p class="split_name">{$ownedSplit['title']}</p></a></td>
-    <td class="td2"><p class="split_owner">👤 {$ownedSplit['displayed_name']}</p></td>
+    <td class="td2"><p class="split_owner">&#x1F464; {$ownedSplit['displayed_name']}</p></td>
     <td class="td3"><p class="split_date">{$date->format('Y-m-d')} &mdash; {$date->format('H:i')}</p></td>
 </tr>
 HTML;
@@ -46,7 +46,7 @@ HTML;
             echo <<<HTML
 <tr class="split_table_row">
     <td class="td1"><a href="/splits/view?s={$publicSplit['id']}"><p class="split_name">{$publicSplit['title']}</p></a></td>
-    <td class="td2"><p class="split_owner">👤 {$publicSplit['displayed_name']}</p></td>
+    <td class="td2"><p class="split_owner">&#x1F464; {$publicSplit['displayed_name']}</p></td>
     <td class="td3"><p class="split_date">{$date->format('Y-m-d')} &mdash; {$date->format('H:i')}</p></td>
 </tr>
 HTML;

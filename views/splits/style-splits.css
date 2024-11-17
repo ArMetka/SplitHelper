@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.9;
 }
 
-.header a.active{
+.header a.active {
     opacity: 1;
 }
 
@@ -117,11 +117,12 @@ h1, h2, h3, h4, h5, h6 {
     opacity: .6;
 }
 
-/* table */
+/* table list */
 
 .split_table {
     margin: 0 50px;
     width: 95%;
+    border-collapse: collapse;
     border: none;
 }
 
@@ -183,4 +184,90 @@ h1, h2, h3, h4, h5, h6 {
 .form-checkbox input {
     width: 30px;
     height: 30px;
+}
+
+/* container view */
+
+.container_view {
+    min-width: 600px;
+    margin: 0 100px;
+}
+
+.container_view h1 {
+    font-size: 32px;
+    margin: 15px 0;
+}
+
+.container_view p {
+    opacity: .7;
+    margin: 15px 0;
+}
+
+.container_view .split_btn {
+    width: 180px;
+    height: 45px;
+    border-radius: 10px;
+    background-color: lightgrey;
+    font-size: 16px;
+    text-indent: -5px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.container_view .split_btn:hover {
+    background-color: #aaaaaa;
+}
+
+.container_view .delete_btn:hover {
+    background-color: #c71717;
+}
+
+/* table view */
+
+.content_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    table-layout: fixed;
+}
+
+.content_table th,
+.content_table td {
+    padding: 9px 10px;
+    text-align: center;
+    border: 1px solid #cccccc;
+    background-color: #626262;
+}
+
+.content_table th,
+.content_table tfoot,
+.content_table tfoot td {
+    font-weight: bold;
+    border-bottom: 4px solid #cccccc;
+}
+
+.content_table tfoot {
+    border-top: 4px solid #cccccc;
+}
+
+.content_table .unchecked {
+    background-color: rgba(255, 82, 82, 0.3);
+}
+
+.content_table td:nth-child(1),
+.content_table th:nth-child(1) {
+    text-align: start;
+    width: 34%;
+}
+
+.content_table td:nth-child(2),
+.content_table th:nth-child(2) {
+    text-align: start;
+    width: 8%;
+}
+
+.content_table td:nth-child(3),
+.content_table th:nth-child(3) {
+    text-align: start;
+    width: 8%;
 }
