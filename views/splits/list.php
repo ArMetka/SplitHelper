@@ -6,7 +6,7 @@
     <style>
         <?php include __DIR__ . '/style-splits.css'?>
     </style>
-    <title>Home</title>
+    <title>Splits</title>
 </head>
 <body>
 

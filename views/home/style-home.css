@@ -69,10 +69,13 @@ h1, h2, h3, h4, h5, h6 {
     gap: 30px;
 }
 
+iframe {
+    border: none;
+}
+
 .gifka {
     width: 100%;
     min-height: 100%;
-    margin-top: 100px;
     display: flex;
     justify-content: center;
 }

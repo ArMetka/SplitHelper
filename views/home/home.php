@@ -16,6 +16,8 @@ echo $this->getHeader($_SESSION['username'] ?? 'null', 'home') ?>
     <button id="useless_btn" class="glow-on-hover" type="button">Useless Button</button>
 </div>
 
+<p align="center"><iframe src="https://store.steampowered.com/widget/2694490/" width="646" height="190"></iframe></p>
+
 <div class="gifka">
     <img src="/img?i=botani.gif" alt="botani">
 </div>

@@ -23,7 +23,7 @@
             background-color: rgba(114, 255, 107, 0.3);
         }
     </style>
-    <title>Home</title>
+    <title><?php echo $this->params['split']['title'] ?? 'null'?></title>
 </head>
 <body>
 
@@ -60,10 +60,16 @@ echo $this->getHeader($_SESSION['username'] ?? 'null', 'splits') ?>
             <button class="split_btn">&#x1F310; Edit access</button>
         </a>
 
-        <a href="/splits/delete?s=<?php
-        echo $this->params['split']['id'] ?>">
-            <button class="split_btn delete_btn">&#xFF0D;Delete split</button>
-        </a>
+        <button id="btn-delete" class="split_btn delete_btn">&#xFF0D;Delete split</button>
+    </div>
+
+    <div class="errors">
+        <p>
+            <?php
+            echo $_SESSION['errors']['view'] ?? '';
+            unset($_SESSION['errors']['view']);
+            ?>
+        </p>
     </div>
 
     <table class="content_table">
@@ -157,6 +163,8 @@ echo $this->getHeader($_SESSION['username'] ?? 'null', 'splits') ?>
         </tfoot>
     </table>
 </div>
-
+<script>
+    <?php include __DIR__ . '/script.js'?>
+</script>
 </body>
 </html>

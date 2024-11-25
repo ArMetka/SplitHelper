@@ -56,6 +56,33 @@ class SplitService
         return $uniqueStr;
     }
 
+
+    public function deleteById(string $s): void
+    {
+        $queryDeleteSplit = <<<TEXT
+DELETE FROM splits WHERE id = '{$s}'
+TEXT;
+        $queryDropClients = <<<TEXT
+DROP TABLE generated_tables.clients_{$s}
+TEXT;
+        $queryDropItems = <<<TEXT
+DROP TABLE generated_tables.items_{$s}
+TEXT;
+
+        try {
+            $this->db->beginTransaction();
+
+            $this->db->query($queryDeleteSplit);
+            $this->db->query($queryDropClients);
+            $this->db->query($queryDropItems);
+
+            $this->db->commit();
+        } catch (\Throwable $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
+    }
+
     public function fetchAllById(string $id): array
     {
         $query = <<<TEXT
