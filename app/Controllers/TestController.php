@@ -20,7 +20,6 @@ class TestController
             'PWD',
             'HTTP_COOKIE',
             'HTTP_ACCEPT_LANGUAGE',
-            'HTTP_REFERER',
             'HTTP_ACCEPT',
             'HTTP_USER_AGENT',
             'HTTP_HOST',

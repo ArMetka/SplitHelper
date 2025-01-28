@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Attributes\Get;
+use App\Attributes\Guest;
 use App\Attributes\Secure;
 use App\View;
 use DirectoryIterator;
 
 class ImgController
 {
-    #[Secure]
     #[Get('/img')]
     #[Get('/gif')]
     public function getImage(): never
