@@ -1,6 +1,7 @@
 # Split Helper
 
     Сервис для разделения чеков (WIP)
+![split_view](img/split_view.png)
 
 ### Work in progress
 
