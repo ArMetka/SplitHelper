@@ -56,6 +56,33 @@ class SplitService
         return $uniqueStr;
     }
 
+
+    public function deleteById(string $s): void
+    {
+        $queryDeleteSplit = <<<TEXT
+DELETE FROM splits WHERE id = '{$s}'
+TEXT;
+        $queryDropClients = <<<TEXT
+DROP TABLE generated_tables.clients_{$s}
+TEXT;
+        $queryDropItems = <<<TEXT
+DROP TABLE generated_tables.items_{$s}
+TEXT;
+
+        try {
+            $this->db->beginTransaction();
+
+            $this->db->query($queryDeleteSplit);
+            $this->db->query($queryDropClients);
+            $this->db->query($queryDropItems);
+
+            $this->db->commit();
+        } catch (\Throwable $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
+    }
+
     public function fetchAllById(string $id): array
     {
         $query = <<<TEXT
@@ -68,16 +95,21 @@ TEXT;
 
         $query = <<<TEXT
 SELECT * FROM generated_tables.items_{$id}
+ORDER BY id
 TEXT;
         $stmt = $this->db->query($query);
         $itemsData = $stmt->fetchAll();
 
         $query = <<<TEXT
-SELECT users.displayed_name, item_ids FROM generated_tables.clients_{$id}
+SELECT user_id, users.displayed_name, array_to_json(item_ids) AS item_ids FROM generated_tables.clients_{$id}
 INNER JOIN users ON users.id = generated_tables.clients_{$id}.user_id
+ORDER BY user_id
 TEXT;
         $stmt = $this->db->query($query);
         $clientsData = $stmt->fetchAll();
+        foreach ($clientsData as &$clientsDatum) {
+            $clientsDatum['item_ids'] = json_decode($clientsDatum['item_ids']);
+        }
 
         return [
             'split' => $splitData,

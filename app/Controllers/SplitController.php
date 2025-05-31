@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Attributes\Delete;
 use App\Attributes\Get;
 use App\Attributes\Post;
 use App\Attributes\Secure;
@@ -73,11 +74,52 @@ class SplitController
 
         $params = $this->splitService->fetchAllById($_GET['s']);
 
-        echo '<pre>';
-        var_dump($params);
-        echo '</pre>';
-        exit;
-
         return View::make('splits/view', $params);
+    }
+
+    #[Secure]
+    #[Get('/splits/edit')]
+    public function editSplit(): View
+    {
+        echo 'Unsupported';
+        exit;
+    }
+
+    #[Secure]
+    #[Delete('/splits/delete')]
+    public function deleteSplit(): never
+    {
+        if (!isset($_GET['s']) || !$this->splitService->checkSplitAccess(
+                $_GET['s'],
+                $_SESSION['user'],
+                SplitAccessLevel::Owner
+            )) {
+            http_response_code(403);
+            View::make('errors/403');
+            exit;
+        }
+
+        $this->splitService->deleteById($_GET['s']);
+
+        exit;
+    }
+
+    #[Secure]
+    #[Get('/splits/access')]
+    public function editAccess(): View
+    {
+        if (!isset($_GET['s']) || !$this->splitService->checkSplitAccess(
+                $_GET['s'],
+                $_SESSION['user'],
+                SplitAccessLevel::Owner
+            )) {
+            http_response_code(403);
+            View::make('errors/403');
+            exit;
+        }
+
+        $params = $this->splitService->fetchAllById($_GET['s']);
+
+        return View::make('splits/access', $params);
     }
 }

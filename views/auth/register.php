@@ -31,12 +31,12 @@
 
         <div class="form_user_pass">
             <p>Password</p>
-            <input type="password" name="password"  placeholder="Password" required>
+            <input type="password" name="password" placeholder="Password" required>
         </div>
 
         <div class="form_user_pass">
             <p>Repeat password</p>
-            <input type="password" name="repeat_password"  placeholder="Password" required>
+            <input type="password" name="repeat_password" placeholder="Password" required>
         </div>
 
         <div class="button_login">

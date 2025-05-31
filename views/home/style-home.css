@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.9;
 }
 
-.container a.active{
+.container a.active {
     opacity: 1;
 }
 
@@ -69,10 +69,13 @@ h1, h2, h3, h4, h5, h6 {
     gap: 30px;
 }
 
+iframe {
+    border: none;
+}
+
 .gifka {
     width: 100%;
     min-height: 100%;
-    margin-top: 100px;
     display: flex;
     justify-content: center;
 }
@@ -107,7 +110,7 @@ h1, h2, h3, h4, h5, h6 {
     background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
     position: absolute;
     top: -2px;
-    left:-2px;
+    left: -2px;
     background-size: 400%;
     z-index: -1;
     filter: blur(5px);
@@ -144,7 +147,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes glowing {
-    0% { background-position: 0 0; }
-    50% { background-position: 400% 0; }
-    100% { background-position: 0 0; }
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
 }
