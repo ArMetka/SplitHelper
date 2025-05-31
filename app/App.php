@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Controllers\AuthController;
+use App\Controllers\AjaxController;
 use App\Controllers\HomeController;
 use App\Controllers\ImgController;
 use App\Controllers\MeController;
@@ -28,6 +29,7 @@ class App
 
         $this->router->registerRoutesFromAttributes([
                 HomeController::class,
+                AjaxController::class,
                 TestController::class,
                 AuthController::class,
                 RedirectController::class,

@@ -36,7 +36,7 @@ class View
 
     public function getHeader(string $name = 'null', string $active = ''): string
     {
-        $home = $splits = $github = $test = $username = '';
+        $home = $ajax = $splits = $github = $test = $username = '';
         if (!empty($active)) {
             $$active = 'class="active"';
         }
@@ -53,6 +53,7 @@ class View
             <nav class="header-nav">
                 <ul class="header-nav-list">
                     <li><a {$home} href="/home">home</a></li>
+                    <li><a {$ajax} href="/ajax">ajax</a></li>
                     <li><a {$splits} href="/splits">splits</a></li>
                     <li><a {$github} href="https://github.com/ArMetka/SplitHelper" target="_blank">github</a></li>
                     <li><a {$test} href="/test">test</a></li>

@@ -27,7 +27,7 @@ echo $this->getHeader($_SESSION['username'] ?? 'null', 'home') ?>
         const num = Math.round(Math.random() * 100);
         console.log(num);
         if (num === 69) {
-            alert('V EBAL0 SEBE P0Tb1KAY D0LB4Y0B');
+            alert('V () SEBE P0Tb1KAY ())');
             window.location.href = "https://www.youtube.com/watch?v=hr7GyFM7pX4";
         }
     }
